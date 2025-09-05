@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinVault - Smart Photo Privacy Protection</title>
+    <meta name="description" content="Protect your sensitive photos with intelligent AI detection. SkinVault automatically identifies and secures private images in your photo library.">
+    <meta property="og:title" content="SkinVault - Smart Photo Privacy Protection">
+    <meta property="og:description" content="Take control of your photo privacy with AI-powered protection.">
+    <meta property="og:image" content="https://skinvault.neherdata.com/images/og-image.png">
+    <meta property="og:url" content="https://skinvault.neherdata.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #007AFF;
+            --secondary: #5856D6;
+            --dark: #1C1C1E;
+            --light: #F2F2F7;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--secondary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--secondary);
+        }
+
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 15px;
+            background: var(--light);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .pricing {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-features li:before {
+            content: "✓ ";
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">SkinVault</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="https://privacy.neherdata.com">Privacy</a></li>
+                <li><a href="https://support.neherdata.com">Support</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Smart Photo Privacy Protection</h1>
+            <p>AI-powered detection to automatically secure your sensitive photos</p>
+            <div class="cta-buttons">
+                <a href="https://apps.apple.com/app/skinvault" class="btn btn-primary">Download on App Store</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Powerful Privacy Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Detection</h3>
+                    <p>Advanced machine learning instantly identifies sensitive content in your photo library</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Military-Grade Security</h3>
+                    <p>Your photos are protected with industry-standard encryption and Face ID/Touch ID</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>100% Private</h3>
+                    <p>All processing happens on your device. Your photos never leave your phone</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Scan thousands of photos in seconds with our optimized detection algorithms</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📂</div>
+                    <h3>Smart Organization</h3>
+                    <p>Automatically categorize and organize your protected content</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👻</div>
+                    <h3>Stealth Mode</h3>
+                    <p>Hide the app from prying eyes with our discrete protection features</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Simple, Transparent Pricing</h2>
+            <div class="pricing-card">
+                <div class="price">
+                    $4.99<span class="price-period">/month</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>Unlimited photo scanning</li>
+                    <li>Advanced AI detection modes</li>
+                    <li>Custom security settings</li>
+                    <li>Priority customer support</li>
+                    <li>Regular feature updates</li>
+                    <li>No ads, ever</li>
+                </ul>
+                <div style="text-align: center;">
+                    <a href="https://apps.apple.com/app/skinvault" class="btn btn-primary">Start Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://privacy.neherdata.com">Privacy Policy</a>
+                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use</a>
+                <a href="https://support.neherdata.com">Support</a>
+                <a href="mailto:support@neherdata.com">Contact</a>
+            </div>
+            <p>&copy; 2024 Neher Data Systems. All rights reserved.</p>
+            <p style="margin-top: 1rem; opacity: 0.6;">SkinVault is a product of Neher Data Systems</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
